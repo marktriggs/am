@@ -197,3 +197,27 @@ services:
       - "8000"
     links:
       - "mysql"
+
+  mst-development:
+    build:
+      context: "MSTDevelopment"
+    volumes:
+      - "archivematica_pipeline_data:/var/archivematica/sharedDirectory:rw"
+      - "archivematica_storage_service_location_data:/home:rw"
+      - "archivematica_storage_service_staging_data:/var/archivematica/storage_service:rw"
+      - "../src/archivematica/src/archivematicaCommon/:/src/archivematicaCommon/"
+      - "../src/archivematica/src/dashboard/:/src/dashboard/"
+      - "../src/archivematica/src/MCPClient/:/src/MCPClient/"
+      - "../src/archivematica-storage-service/:/src/"
+    links:
+      - "mysql"
+      - "elasticsearch"
+      - "redis"
+      - "gearmand"
+      - "fits"
+      - "clamavd"
+      - "nginx"
+      - "archivematica-mcp-server"
+      - "archivematica-mcp-client"
+      - "archivematica-dashboard"
+      - "archivematica-storage-service"
